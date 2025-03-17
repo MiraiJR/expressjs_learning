@@ -1,6 +1,6 @@
 import { exec } from "child_process";
 
-export const runPrismaCommand = (command: string): Promise<void> => {
+export const runCommand = (command: string): Promise<void> => {
   return new Promise((resolve, reject) => {
     exec(command, (error, stdout, stderr) => {
       if (error) {

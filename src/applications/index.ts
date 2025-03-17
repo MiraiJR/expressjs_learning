@@ -1,6 +1,6 @@
 import express, { Application } from "express";
 import apiRoute from "./routes";
-import { runPrismaCommand } from "@/shared/utils/shell_command";
+import { runCommand } from "@/shared/utils/shell_command";
 import { errorHandler } from "@/shared/middlewares/error-handler";
 
 const app: Application = express();
@@ -8,7 +8,8 @@ const port: number = 3000;
 
 (async () => {
   try {
-    await runPrismaCommand("npx prisma db push");
+    // apply anychange from prima schema
+    await runCommand("npx prisma db push");
     console.log("Prisma db push completed successfully.");
 
     // Middleware
