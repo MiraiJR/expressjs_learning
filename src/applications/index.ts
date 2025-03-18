@@ -9,7 +9,7 @@ const port: number = 3000;
 (async () => {
   try {
     // apply anychange from prima schema
-    await runCommand("npx prisma db push");
+    await runCommand("npx prisma db push --accept-data-loss");
     console.log("Prisma db push completed successfully.");
 
     // Middleware
