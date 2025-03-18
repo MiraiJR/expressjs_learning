@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { StatusCode } from "@/shared/constant";
-import { HttpException } from "@/shared/exceptions";
 import * as userService from "@/applications/users/user-service";
 
 export const getSpecifiedUserHandler = async (req: Request, res: Response) => {
@@ -16,6 +15,8 @@ export const getSpecifiedUserHandler = async (req: Request, res: Response) => {
 };
 
 export const createUserHandler = async (req: Request, res: Response) => {
+  console.log(req.body);
+
   // validate body
 
   const createdUser = await userService.createUser(req.body);

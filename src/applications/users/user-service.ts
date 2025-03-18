@@ -6,7 +6,7 @@ import { User } from "@prisma/client";
 
 export const createUser = async (data: ICreateUser): Promise<User | null> => {
   // check existing email
-  const isExisted = await userRepository.getUserByEmail(data.email);
+  const isExisted = await userRepository.getUserByEmail(data.email ?? "");
 
   if (isExisted) {
     throw new HttpException(

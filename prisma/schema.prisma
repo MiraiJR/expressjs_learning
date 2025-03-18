@@ -18,7 +18,51 @@ model User {
   firstName String   @map("first_name")
   lastName  String   @map("last_name")
   email     String
+  role      UserRole @default(USER)
   createdAt DateTime @default(now()) @map("created_at")
+  Post      Post[]
 
+  @@unique([email])
+  @@index([id, email])
   @@map("users")
+}
+
+model Post {
+  id                Int                 @id @default(autoincrement())
+  createdAt         DateTime            @default(now()) @map("created_at")
+  updatedAt         DateTime            @default(now()) @map("updated_at")
+  title             String
+  published         Boolean             @default(false)
+  author            User                @relation(fields: [authorId], references: [id])
+  authorId          Int                 @map("author_id")
+  CategoriesOnPosts CategoriesOnPosts[]
+
+  @@index([id, authorId])
+  @@map("posts")
+}
+
+model Category {
+  id                Int                 @id @default(autoincrement())
+  name              String
+  CategoriesOnPosts CategoriesOnPosts[]
+
+  @@index([id])
+  @@map("categories")
+}
+
+model CategoriesOnPosts {
+  post       Post     @relation(fields: [postId], references: [id])
+  postId     Int
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  assignedAt DateTime @default(now())
+
+  @@id([postId, categoryId])
+  @@index([postId, categoryId])
+  @@map("categories_on_posts")
+}
+
+enum UserRole {
+  USER
+  ADMIN
 }
