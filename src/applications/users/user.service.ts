@@ -1,10 +1,12 @@
 import { HttpException } from "@/shared/exceptions";
-import * as userRepository from "./user-repository";
+import * as userRepository from "./user.repository";
 import { StatusCode } from "@/shared/constant";
-import { ICreateUser } from "./model";
 import { User } from "@prisma/client";
+import { PostCreateUserRequestModel } from "./models/create-user.model";
 
-export const createUser = async (data: ICreateUser): Promise<User | null> => {
+export const createUser = async (
+  data: PostCreateUserRequestModel
+): Promise<User | null> => {
   // check existing email
   const isExisted = await userRepository.getUserByEmail(data.email ?? "");
 

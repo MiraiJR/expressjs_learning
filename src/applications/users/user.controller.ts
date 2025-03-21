@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { StatusCode } from "@/shared/constant";
-import * as userService from "@/applications/users/user-service";
+import * as userService from "@/applications/users/user.service";
 
 export const getSpecifiedUserHandler = async (req: Request, res: Response) => {
   // validate params
@@ -15,10 +15,6 @@ export const getSpecifiedUserHandler = async (req: Request, res: Response) => {
 };
 
 export const createUserHandler = async (req: Request, res: Response) => {
-  console.log(req.body);
-
-  // validate body
-
   const createdUser = await userService.createUser(req.body);
 
   res.status(StatusCode.CREATED).json(createdUser);

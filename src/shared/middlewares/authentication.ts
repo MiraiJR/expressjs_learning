@@ -14,10 +14,7 @@ export const authentication = (req: Request, res: Response, next: Function) => {
   }
 
   if (token === "abc") {
-    req.body = {
-      id: 1,
-      role: "admin",
-    };
+    // add loggedinUser to request
     next();
   } else {
     next(
