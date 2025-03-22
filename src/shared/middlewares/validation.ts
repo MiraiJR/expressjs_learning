@@ -5,7 +5,8 @@ export const validation =
   <T extends ZodObject<any>>(schema: T, target: "body" | "query" | "params") =>
   (req: Request, _: Response, next: NextFunction) => {
     try {
-      schema.parse(req[target]);
+      const result = schema.parse(req[target]);
+      req[target] = result;
       next();
     } catch (error) {
       next(error);
