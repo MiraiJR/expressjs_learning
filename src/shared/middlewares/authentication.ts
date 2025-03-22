@@ -5,8 +5,6 @@ import { StatusCode } from "../constant";
 const BEARER_TOKEN_PREFIX = "Bearer ";
 
 export const authentication = (req: Request, res: Response, next: Function) => {
-  console.log("authentication");
-
   const authentication = req.headers.authorization;
   let token = "";
   if (authentication && authentication.startsWith(BEARER_TOKEN_PREFIX)) {
@@ -14,7 +12,10 @@ export const authentication = (req: Request, res: Response, next: Function) => {
   }
 
   if (token === "abc") {
-    // add loggedinUser to request
+    req.user = {
+      id: 1,
+      role: "ADMIN",
+    };
     next();
   } else {
     next(

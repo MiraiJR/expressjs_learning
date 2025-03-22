@@ -14,6 +14,7 @@
     "paths": {
       "@/applications/*": ["./src/applications/*"],
       "@/shared/*": ["./src/shared/*"]
-    }                       
+    },
+    "typeRoots": ["./src/shared/types", "./node_modules/@types"]
   }
 }
